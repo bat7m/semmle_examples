@@ -6,7 +6,7 @@ int main(int argc, char* argv[])
     int x = strlen(argv[1]);
 
 // TODO: fix this overflow
-    if(argc + x < x )
+    if(argc + x < argc )
         printf("smaller");
     else
         printf("bigger");
