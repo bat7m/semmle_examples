@@ -2,6 +2,15 @@
 #include <string.h>
 #define MAXBUFLEN 80
 
+
+int fsize(FILE *fp){
+    int prev=ftell(fp);
+    fseek(fp, 0L, SEEK_END);
+    int sz=ftell(fp);
+    fseek(fp,prev,SEEK_SET); //go back to where we were
+    return sz;
+}
+
 int main(unsigned int argc, char* argv[])
 {
     unsigned int x = strlen(argv[1]);
@@ -14,11 +23,10 @@ int main(unsigned int argc, char* argv[])
 
 
 
-
 	char source[MAXBUFLEN + 1];
 	FILE *fp = fopen("foo.txt", "r");
 	if (fp != NULL) {
-		size_t newLen = fread(source, sizeof(char), MAXBUFLEN, fp);
+		size_t newLen = fread(source, sizeof(char), fsize(fp), fp);
 		if ( ferror( fp ) != 0 ) {
 			fputs("Error reading file", stderr);
 		} else {
