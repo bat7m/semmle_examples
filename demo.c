@@ -2,9 +2,9 @@
 #include <string.h>
 #define MAXBUFLEN 80
 
-int main(int argc, char* argv[])
+int main(unsigned int argc, char* argv[])
 {
-    int x = strlen(argv[1]);
+    unsigned int x = strlen(argv[1]);
 
 // TODO: fix this overflow please
     if(argc + x < argc )
