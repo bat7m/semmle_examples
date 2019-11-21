@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#define MAXBUFLEN 80
 
 int main(int argc, char* argv[])
 {
@@ -10,6 +11,25 @@ int main(int argc, char* argv[])
         printf("smaller");
     else
         printf("bigger");
+
+
+
+
+	char source[MAXBUFLEN + 1];
+	FILE *fp = fopen("foo.txt", "r");
+	if (fp != NULL) {
+		size_t newLen = fread(source, sizeof(char), MAXBUFLEN, fp);
+		if ( ferror( fp ) != 0 ) {
+			fputs("Error reading file", stderr);
+		} else {
+			source[newLen++] = '\0'; /* Just to be safe. */
+		}
+
+		fclose(fp);
+	}
+
+
+
 
     return 0;
 }
