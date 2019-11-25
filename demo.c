@@ -34,11 +34,13 @@ int main(unsigned int argc, char* argv[])
 	if (fp != NULL) {
 		int fileSize2 = fsize(fp);
 		//no overflow
-		size_t newLen = fread(source2, sizeof(char), fileSize2, fp);
-		if ( ferror( fp ) != 0 ) {
-			fputs("Error reading file", stderr);
-		} else {
-			source[newLen++] = '\0'; /* Just to be safe. */
+		if (sizeof (source2) > fileSize2) {
+			size_t newLen = fread(source2, sizeof(char), fileSize2, fp);
+			if ( ferror( fp ) != 0 ) {
+				fputs("Error reading file", stderr);
+			} else {
+				source2[newLen++] = '\0'; /* Just to be safe. */
+			}
 		}
 
 		fclose(fp);
