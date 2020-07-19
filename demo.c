@@ -269,7 +269,8 @@ int no_overflow_f_call_g_call_function_that_reads_with_taint(){
 }
 
 int get_size(char *src){
-	return sizeof(src);
+	//  deepcode ignore SizeofPassedArray: intentional error. looking for others
+	return sizeof(src); 
 }
 int no_overflow_size_from_func(){
 	char source12[MAXBUFLEN];
