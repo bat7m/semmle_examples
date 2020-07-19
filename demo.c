@@ -167,7 +167,8 @@ int no_overflow_local_malloc(){
 		}
 		
 		fclose(fp);
-	}
+	} 
+	free (source7);
 	return 0;
 }
 int init_buf(char** buf, int* size){
@@ -203,7 +204,7 @@ int no_overflow_function_call(){
    init_buf(&source8, &size8);
 
 	FILE *fp = fopen("foo.txt", "r");
-	if (fp != NULL) {
+	if ((fp != NULL) && (source8 != NULL)) {
 
 
 		size_t newLen = fread(source8, sizeof(char), size8, fp);
@@ -365,7 +366,7 @@ int no_overflow_func_malloc_read_less(int x){
    init_large_buf(&source23, &size23);
 
 	FILE *fp = fopen("foo.txt", "r");
-	if (fp != NULL) {
+	if ( (fp != NULL) && (source23 != NULL)) {
 
 
 		size_t newLen = fread(source23, sizeof(char), x+MAXBUFLEN, fp);
@@ -388,7 +389,7 @@ int no_overflow_func_malloc_read_less_one_scope(int x){
 	source24 = (char *) malloc(size24);
 
 	FILE *fp = fopen("foo.txt", "r");
-	if (fp != NULL) {
+	if ((fp != NULL) && (source24 !=NULL)) {
 
 
 		size_t newLen = fread(source24, sizeof(char), x+MAXBUFLEN, fp);
